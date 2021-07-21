@@ -20,7 +20,7 @@ type QQAppInfo struct {
 	BannerUrl         string `json:"banner_url"`
 	Desc              string `json:"desc"`
 	PagePath          string `json:"page_path"`
-	QqAppIconUrl      string `json:"qq_app_icon_url"`
+	QQAppIconUrl      string `json:"qq_app_icon_url"`
 	SourceDisplayName string `json:"source_display_name"`
 	UserName          string `json:"user_name"`
 	Title             string `json:"title"`

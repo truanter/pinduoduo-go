@@ -6,7 +6,7 @@ type DDKGoodsRecommendResult struct {
 		List     []GoodsRecommendInfo `json:"list"`
 		ListID   string               `json:"list_id"`
 		SearchID string               `json:"search_id"`
-		Total    string               `json:"total"`
+		Total    int                  `json:"total"`
 	} `json:"goods_basic_detail_response"`
 }
 type DDKGoodsRecommendRequest struct {
@@ -23,52 +23,64 @@ type DDKGoodsRecommendRequest struct {
 }
 
 type GoodsRecommendInfo struct {
-	QrCodeImageUrl       string  `json:"qr_code_image_url"`       //二维码主图
-	LockEdit             string  `json:"lock_edit"`               //编辑锁定
-	Broker               string  `json:"broker"`                  //代理人
-	Rank                 string  `json:"rank"`                    //顺序
-	SaleNumToday         int     `json:"sale_num_today"`          //今日成交量
-	SaleNum24            int     `json:"sale_num24"`              //成交量
-	ShareDesc            string  `json:"share_desc"`              //分享描述
-	CatID                int64   `json:"cat_id"`                  //商品类目id
-	GoodsEvalCount       int     `json:"goods_eval_count"`        //商品评价数量
-	MarketFee            int     `json:"market_fee"`              //市场服务费
-	GoodsRate            int     `json:"goods_rate"`              //商品等级
-	CouponPrice          int     `json:"coupon_price"`            //优惠券金额 分
-	PromotionRate        int     `json:"promotion_rate"`          //佣金比例,千分比
-	CouponEndTime        int64   `json:"coupon_end_time"`         //优惠券失效时间,UNIX时间戳
-	CouponStartTime      int64   `json:"coupon_start_time"`       //优惠券生效时间,UNIX时间戳
-	CouponRemainQuantity int     `json:"coupon_remain_quantity"`  //优惠券剩余数量
-	CouponTotalQuantity  int     `json:"coupon_total_quantity"`   //优惠券总数量
-	CouponDiscount       int     `json:"coupon_discount"`         //优惠券面额,单位为分
-	CouponMinOrderAmount int     `json:"coupon_min_order_amount"` //优惠券门槛价格,单位为分
-	CouponID             int64   `json:"coupon_id"`               //优惠券id
-	HasCoupon            bool    `json:"has_coupon"`              //商品是否带券,true-带券,false-不带券
-	GoodsType            int     `json:"goods_type"`              //商品类型
-	CatIds               []int64 `json:"cat_ids"`                 //商品一~四级类目ID列表
-	OptIds               []int64 `json:"opt_ids"`                 //商品一~四级标签类目ID列表
-	OptName              string  `json:"opt_name"`                //商品标签名
-	OptID                int64   `json:"opt_id"`                  //商品标签类目ID,使用pdd.goods.opt.get获取
-	CategoryName         string  `json:"category_name"`           //分类名称
-	CategoryID           int64   `json:"category_id"`             //类目id
-	MerchantType         int     `json:"merchant_type"`           //商家类型
-	MallName             string  `json:"mall_name"`               //店铺名称
-	MallID               int64   `json:"mall_id"`                 //商家id
-	MinNormalPrice       int     `json:"min_normal_price"`        //最小单买价格，单位分
-	MinGroupPrice        int     `json:"min_group_price"`         //最小成团价格，单位分
-	GoodsFactPrice       int     `json:"goods_fact_price"`        //商品实际价格
-	GoodsMarkPrice       int     `json:"goods_mark_price"`        //商品标准价格
-	SoldQuantity         int     `json:"sold_quantity"`           //销售量
-	GoodsGalleryUrls     string  `json:"goods_gallery_urls"`      //商品详情图列表
-	GoodsImageURL        string  `json:"goods_image_url"`         //商品主图
-	GoodsThumbnailUrl    string  `json:"goods_thumbnail_url"`     //商品缩略图
-	GoodsDesc            string  `json:"goods_desc"`              //商品描述
-	GoodsName            string  `json:"goods_name"`              //商品名称
-	GoodsID              int64   `json:"goods_id"`                //商品id
-	CreateAt             int64   `json:"create_at"`               //创建时间
-	DescTxt              string  `json:"desc_txt"`
-	ServTxt              string  `json:"serv_txt"`
-	LgstTxt              string  `json:"lgst_txt"`
-	SearchID             string  `json:"search_id"`
-	GoodsSign            string  `json:"goods_sign"`
+	ActivityPromotionRate      int64    `json:"activity_promotion_rate,omitempty"`        //活动佣金比例，千分比（特定活动期间的佣金比例
+	ActivityTags               []int    `json:"activity_tags,omitempty"`                  //商品活动标记数组，例：[4,7]，4-秒杀，7-百亿补贴，24-品牌高佣，20-行业精选，21-金牌商家，10044-潜力爆品，10475-爆品上新，其他的值请忽略
+	BrandName                  string   `json:"brand_name,omitempty"`                     //商品品牌词信息
+	QrCodeImageUrl             string   `json:"qr_code_image_url"`                        //二维码主图
+	LockEdit                   string   `json:"lock_edit"`                                //编辑锁定
+	Broker                     string   `json:"broker"`                                   //代理人
+	Rank                       string   `json:"rank"`                                     //顺序
+	SaleNumToday               int      `json:"sale_num_today"`                           //今日成交量
+	SaleNum24                  int      `json:"sale_num24"`                               //成交量
+	ShareDesc                  string   `json:"share_desc"`                               //分享描述
+	CatID                      int64    `json:"cat_id"`                                   //商品类目id
+	GoodsEvalCount             int      `json:"goods_eval_count"`                         //商品评价数量
+	MarketFee                  int      `json:"market_fee"`                               //市场服务费
+	GoodsRate                  int      `json:"goods_rate"`                               //商品等级
+	CouponPrice                int64    `json:"coupon_price"`                             //优惠券金额 分
+	PromotionRate              int      `json:"promotion_rate"`                           //佣金比例,千分比
+	CouponEndTime              int64    `json:"coupon_end_time"`                          //优惠券失效时间,UNIX时间戳
+	CouponStartTime            int64    `json:"coupon_start_time"`                        //优惠券生效时间,UNIX时间戳
+	CouponRemainQuantity       int64    `json:"coupon_remain_quantity"`                   //优惠券剩余数量
+	CouponTotalQuantity        int64    `json:"coupon_total_quantity"`                    //优惠券总数量
+	CouponDiscount             int64    `json:"coupon_discount"`                          //优惠券面额,单位为分
+	CouponMinOrderAmount       int64    `json:"coupon_min_order_amount"`                  //优惠券门槛价格,单位为分
+	CouponID                   int64    `json:"coupon_id"`                                //优惠券id
+	HasCoupon                  bool     `json:"has_coupon"`                               //商品是否带券,true-带券,false-不带券
+	GoodsType                  int      `json:"goods_type"`                               //商品类型
+	CatIds                     []int64  `json:"cat_ids"`                                  //商品一~四级类目ID列表
+	OptIds                     []int64  `json:"opt_ids"`                                  //商品一~四级标签类目ID列表
+	OptName                    string   `json:"opt_name"`                                 //商品标签名
+	OptID                      int64    `json:"opt_id"`                                   //商品标签类目ID,使用pdd.goods.opt.get获取
+	CategoryName               string   `json:"category_name"`                            //分类名称
+	CategoryID                 int64    `json:"category_id"`                              //类目id
+	MerchantType               int      `json:"merchant_type"`                            //商家类型
+	MallName                   string   `json:"mall_name"`                                //店铺名称
+	MallID                     int64    `json:"mall_id"`                                  //商家id
+	MinNormalPrice             int64    `json:"min_normal_price"`                         //最小单买价格，单位分
+	MinGroupPrice              int64    `json:"min_group_price"`                          //最小成团价格，单位分
+	GoodsFactPrice             int      `json:"goods_fact_price"`                         //商品实际价格
+	GoodsMarkPrice             int      `json:"goods_mark_price"`                         //商品标准价格
+	SoldQuantity               int      `json:"sold_quantity"`                            //销售量
+	GoodsGalleryUrls           string   `json:"goods_gallery_urls"`                       //商品详情图列表
+	GoodsImageURL              string   `json:"goods_image_url"`                          //商品主图
+	GoodsThumbnailUrl          string   `json:"goods_thumbnail_url"`                      //商品缩略图
+	GoodsDesc                  string   `json:"goods_desc"`                               //商品描述
+	GoodsName                  string   `json:"goods_name"`                               //商品名称
+	GoodsID                    int64    `json:"goods_id"`                                 //商品id
+	CreateAt                   int64    `json:"create_at"`                                //创建时间
+	ExtraCouponAmount          int64    `json:"extra_coupon_amount,omitempty"`            //额外优惠券，单位为分
+	GoodsLabels                []int    `json:"goods_labels"`                             //商品特殊标签列表。例: [1]，1-APP专享
+	PredictPromotionRate       int64    `json:"predict_promotion_rate"`                   //比价行为预判定佣金，需要用户备案
+	RealtimeSalesTip           int64    `json:"realtime_sales_tip,omitempty"`             //商品近1小时在多多进宝的实时销量（仅实时热销榜提供）
+	SalesTip                   string   `json:"sales_tip"`                                //已售卖件数
+	ShareRate                  int      `json:"share_rate,omitempty"`                     //招商分成服务费比例，千分比
+	SubsidyAmount              int      `json:"subsidy_amount,omitempty"`                 //优势渠道专属商品补贴金额，单位为分。
+	SubsidyDuoAmountTenMillion int      `json:"subsidy_duo_amount_ten_million,omitempty"` //千万补贴给渠道的收入补贴，不允许直接给下级代理展示，单位为分
+	UnifiedTags                []string `json:"unified_tags,omitempty"`                   //优惠标签列表
+	DescTxt                    string   `json:"desc_txt"`
+	ServTxt                    string   `json:"serv_txt"`
+	LgstTxt                    string   `json:"lgst_txt"`
+	SearchID                   string   `json:"search_id"`
+	GoodsSign                  string   `json:"goods_sign"`
 }

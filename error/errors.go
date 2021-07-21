@@ -27,3 +27,13 @@ func (e *HttpRequestError) Error() string {
 func NewHttpRequestError(statusCode int) error {
 	return &HttpRequestError{StatusCode: statusCode}
 }
+
+func IsRuntimeError(err error) bool {
+	_, ok := err.(*RuntimeError)
+	return ok
+}
+
+func IsHttpRequestError(err error) bool {
+	_, ok := err.(*HttpRequestError)
+	return ok
+}
