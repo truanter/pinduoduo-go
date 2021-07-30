@@ -51,10 +51,10 @@ type GoodsRecommendInfo struct {
 	CatIds                     []int64  `json:"cat_ids"`                                  //商品一~四级类目ID列表
 	OptIds                     []int64  `json:"opt_ids"`                                  //商品一~四级标签类目ID列表
 	OptName                    string   `json:"opt_name"`                                 //商品标签名
-	OptID                      int64    `json:"opt_id"`                                   //商品标签类目ID,使用pdd.goods.opt.get获取
+	OptID                      int64    `json:"opt_id,string,omitempty"`                  //商品标签类目ID,使用pdd.goods.opt.get获取
 	CategoryName               string   `json:"category_name"`                            //分类名称
-	CategoryID                 int64    `json:"category_id"`                              //类目id
-	MerchantType               int      `json:"merchant_type"`                            //商家类型
+	CategoryID                 int64    `json:"category_id,string,omitempty"`             //类目id
+	MerchantType               int      `json:"merchant_type,string,omitempty"`           //商家类型
 	MallName                   string   `json:"mall_name"`                                //店铺名称
 	MallID                     int64    `json:"mall_id"`                                  //商家id
 	MinNormalPrice             int64    `json:"min_normal_price"`                         //最小单买价格，单位分
@@ -72,7 +72,7 @@ type GoodsRecommendInfo struct {
 	ExtraCouponAmount          int64    `json:"extra_coupon_amount,omitempty"`            //额外优惠券，单位为分
 	GoodsLabels                []int    `json:"goods_labels"`                             //商品特殊标签列表。例: [1]，1-APP专享
 	PredictPromotionRate       int64    `json:"predict_promotion_rate"`                   //比价行为预判定佣金，需要用户备案
-	RealtimeSalesTip           int64    `json:"realtime_sales_tip,omitempty"`             //商品近1小时在多多进宝的实时销量（仅实时热销榜提供）
+	RealtimeSalesTip           int64    `json:"realtime_sales_tip,string,omitempty"`      //商品近1小时在多多进宝的实时销量（仅实时热销榜提供）
 	SalesTip                   string   `json:"sales_tip"`                                //已售卖件数
 	ShareRate                  int      `json:"share_rate,omitempty"`                     //招商分成服务费比例，千分比
 	SubsidyAmount              int      `json:"subsidy_amount,omitempty"`                 //优势渠道专属商品补贴金额，单位为分。
